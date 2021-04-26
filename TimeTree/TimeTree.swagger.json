@@ -1,0 +1,1748 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TimeTree",
+    "description": "TimeTree API のカスタムコネクターになります。\nhttps://developers.timetreeapp.com/ja/docs/api/overview#api-overview",
+    "version": "1.0"
+  },
+  "host": "timetreeapis.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/user": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "id"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "name"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "image_url": {
+                          "type": "string",
+                          "description": "image_url"
+                        }
+                      },
+                      "description": "attributes"
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get An Authorized User",
+        "description": "Obtain information on users authorized by access tokens",
+        "operationId": "GetAnAuthorizedUser",
+        "parameters": [
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "created_at"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "image_url": {
+                            "type": "string",
+                            "description": "image_url"
+                          },
+                          "color": {
+                            "type": "string",
+                            "description": "color"
+                          },
+                          "order": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "order"
+                          }
+                        },
+                        "description": "attributes"
+                      },
+                      "relationships": {
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "description": "id"
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "description": "type"
+                                    }
+                                  }
+                                },
+                                "description": "data"
+                              }
+                            },
+                            "description": "labels"
+                          },
+                          "members": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "description": "id"
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "description": "type"
+                                    }
+                                  }
+                                },
+                                "description": "data"
+                              }
+                            },
+                            "description": "members"
+                          }
+                        },
+                        "description": "relationships"
+                      }
+                    }
+                  },
+                  "description": "data"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "color": {
+                            "type": "string",
+                            "description": "color"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "image_url": {
+                            "type": "string",
+                            "description": "image_url"
+                          }
+                        },
+                        "description": "attributes"
+                      }
+                    }
+                  },
+                  "description": "included"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get The Calendar List",
+        "operationId": "GetTheCalendarList",
+        "description": "Retrieves calendar list information.",
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "labels,members",
+            "x-ms-summary": "Include related objects in the response. Only labels and members are supported. Include related objects in the response. Only creator, label, and attendee are supported.",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars/{calender_id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "id"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "name"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "image_url": {
+                          "type": "string",
+                          "description": "image_url"
+                        },
+                        "color": {
+                          "type": "string",
+                          "description": "color"
+                        },
+                        "order": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "order"
+                        }
+                      },
+                      "description": "attributes"
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "labels": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type"
+                                  }
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "labels"
+                        },
+                        "members": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type"
+                                  }
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "members"
+                        }
+                      },
+                      "description": "relationships"
+                    }
+                  },
+                  "description": "data"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "color": {
+                            "type": "string",
+                            "description": "color"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "image_url": {
+                            "type": "string",
+                            "description": "image_url"
+                          }
+                        },
+                        "description": "attributes"
+                      }
+                    }
+                  },
+                  "description": "included"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a calendar",
+        "operationId": "GetACalendar",
+        "description": "Get a calendar information specified by calendar_id.",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "calender_id",
+            "x-ms-summary": "calender_id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "include",
+            "x-ms-summary": "Include related objects in the response. Only labels and members are supported. Include related objects in the response. Only creator, label, and attendee are supported.",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars/{calender_id}/labels": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "color": {
+                            "type": "string",
+                            "description": "color"
+                          }
+                        },
+                        "description": "attributes"
+                      }
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get the label list",
+        "operationId": "GetTheLabelList",
+        "description": "Get the label information used for the calendar appointments specified by calendar_id.",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "calender_id",
+            "x-ms-summary": "calender_id",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars/{calender_id}/members": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "image_url": {
+                            "type": "string",
+                            "description": "image_url"
+                          }
+                        },
+                        "description": "attributes"
+                      }
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get the participant list",
+        "operationId": "GetTheParticipantList",
+        "description": "Get the information of users who are participating in the calendar specified by calendar_id.",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars/{calender_id}/upcoming_events": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "title"
+                          },
+                          "all_day": {
+                            "type": "boolean",
+                            "description": "all_day"
+                          },
+                          "start_at": {
+                            "type": "string",
+                            "description": "start_at"
+                          },
+                          "start_timezone": {
+                            "type": "string",
+                            "description": "start_timezone"
+                          },
+                          "end_at": {
+                            "type": "string",
+                            "description": "end_at"
+                          },
+                          "end_timezone": {
+                            "type": "string",
+                            "description": "end_timezone"
+                          },
+                          "location": {
+                            "type": "string",
+                            "description": "location"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "url"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "description": "updated_at"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "created_at"
+                          },
+                          "category": {
+                            "type": "string",
+                            "description": "category"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "recurrence": {
+                            "type": "string",
+                            "description": "recurrence"
+                          },
+                          "recurring_uuid": {
+                            "type": "string",
+                            "description": "recurring_uuid"
+                          }
+                        },
+                        "description": "attributes"
+                      },
+                      "relationships": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type"
+                                  }
+                                },
+                                "description": "data"
+                              }
+                            },
+                            "description": "label"
+                          },
+                          "creator": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type"
+                                  }
+                                },
+                                "description": "data"
+                              }
+                            },
+                            "description": "creator"
+                          },
+                          "attendees": {
+                            "type": "object",
+                            "properties": {
+                              "data": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "description": "id"
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "description": "type"
+                                    }
+                                  }
+                                },
+                                "description": "data"
+                              }
+                            },
+                            "description": "attendees"
+                          }
+                        },
+                        "description": "relationships"
+                      }
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "description": "Get the schedule information of the specified calendar from the day of the request.",
+        "summary": "Get the appointment list",
+        "operationId": "GetTheAppointmentList",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timezone",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "UTC",
+            "description": "timezone",
+            "x-ms-summary": "Specify the time zone. It is used in determining the all-day schedule. It does not affect the time zone of the response",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "description": "days",
+            "x-ms-summary": "Number of days to retrieve, can be in the range of 1 to 7. Default is 1",
+            "format": "int64",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "include",
+            "x-ms-summary": "Include related objects in the response. Only creator, label, and attendee are supported.",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars/{calender_id}/events/{event_id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "id"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "title"
+                        },
+                        "all_day": {
+                          "type": "boolean",
+                          "description": "all_day"
+                        },
+                        "start_at": {
+                          "type": "string",
+                          "description": "start_at"
+                        },
+                        "start_timezone": {
+                          "type": "string",
+                          "description": "start_timezone"
+                        },
+                        "end_at": {
+                          "type": "string",
+                          "description": "end_at"
+                        },
+                        "end_timezone": {
+                          "type": "string",
+                          "description": "end_timezone"
+                        },
+                        "location": {
+                          "type": "string",
+                          "description": "location"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "url"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "description": "updated_at"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "category"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "recurrence": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "recurrence"
+                        },
+                        "recurring_uuid": {
+                          "type": "string",
+                          "description": "recurring_uuid"
+                        }
+                      },
+                      "description": "attributes"
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "label"
+                        },
+                        "creator": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "creator"
+                        },
+                        "attendees": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type"
+                                  }
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "attendees"
+                        }
+                      },
+                      "description": "relationships"
+                    }
+                  },
+                  "description": "data"
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "id"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "type"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "name"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "description"
+                          },
+                          "image_url": {
+                            "type": "string",
+                            "description": "image_url"
+                          },
+                          "color": {
+                            "type": "string",
+                            "description": "color"
+                          }
+                        },
+                        "description": "attributes"
+                      }
+                    }
+                  },
+                  "description": "included"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an event",
+        "operationId": "GetAnEvent",
+        "description": "Obtains the event information specified by calendar_id and event_id. イベントの取得",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "calender_id",
+            "x-ms-summary": "calender_id"
+          },
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "event_id",
+            "x-ms-summary": "event_id"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "include",
+            "x-ms-summary": "Include related objects in the response. Only creator, label, and attendee are supported.",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "description": "Delete an event from the calendar.",
+        "summary": "Delete an event",
+        "operationId": "DeleteAnEvent",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    },
+    "/calendars/{calender_id}/events": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "id"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "title"
+                        },
+                        "all_day": {
+                          "type": "boolean",
+                          "description": "all_day"
+                        },
+                        "start_at": {
+                          "type": "string",
+                          "description": "start_at"
+                        },
+                        "start_timezone": {
+                          "type": "string",
+                          "description": "start_timezone"
+                        },
+                        "end_at": {
+                          "type": "string",
+                          "description": "end_at"
+                        },
+                        "end_timezone": {
+                          "type": "string",
+                          "description": "end_timezone"
+                        },
+                        "location": {
+                          "type": "string",
+                          "description": "location"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "url"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "description": "updated_at"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "category"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "recurrence": {
+                          "type": "string",
+                          "description": "recurrence"
+                        },
+                        "recurring_uuid": {
+                          "type": "string",
+                          "description": "recurring_uuid"
+                        }
+                      },
+                      "description": "attributes"
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "label"
+                        },
+                        "creator": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "creator"
+                        },
+                        "attendees": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {},
+                              "description": "data"
+                            }
+                          },
+                          "description": "attendees"
+                        }
+                      },
+                      "description": "relationships"
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a event",
+        "operationId": "CreateAnEvent",
+        "description": "Add an event to the calendar",
+        "parameters": [
+          {
+            "name": "calender_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "x-ms-visibility": "internal",
+            "description": "accept",
+            "x-ms-summary": "accept"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string",
+                          "description": "category",
+                          "title": "category",
+                          "default": "schedule",
+                          "enum": [
+                            "schedule",
+                            "keep"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "title",
+                          "title": "title",
+                          "x-ms-visibility": "advanced"
+                        },
+                        "all_day": {
+                          "type": "boolean",
+                          "description": "all_day",
+                          "title": "all_day",
+                          "enum": [
+                            true,
+                            false
+                          ],
+                          "x-ms-visibility": "important"
+                        },
+                        "start_at": {
+                          "type": "string",
+                          "description": "start_at",
+                          "title": "start_at",
+                          "format": "",
+                          "x-ms-visibility": "important"
+                        },
+                        "start_timezone": {
+                          "type": "string",
+                          "description": "start_timezone"
+                        },
+                        "end_at": {
+                          "type": "string",
+                          "description": "end_at",
+                          "title": "end_at",
+                          "format": "",
+                          "x-ms-visibility": "important"
+                        },
+                        "end_timezone": {
+                          "type": "string",
+                          "description": "end_timezone"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "location": {
+                          "type": "string",
+                          "description": "location"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "url"
+                        }
+                      },
+                      "description": "attributes",
+                      "required": [
+                        "title",
+                        "category",
+                        "all_day",
+                        "start_at",
+                        "end_at"
+                      ]
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id",
+                                  "title": "event label id",
+                                  "x-ms-visibility": "important"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type",
+                                  "title": "type",
+                                  "x-ms-visibility": "internal",
+                                  "default": "label"
+                                }
+                              },
+                              "description": "data",
+                              "required": [
+                                "id",
+                                "type"
+                              ]
+                            }
+                          },
+                          "description": "label",
+                          "required": [
+                            "data"
+                          ]
+                        },
+                        "attendees": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id",
+                                    "title": "id",
+                                    "x-ms-visibility": "advanced"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type",
+                                    "title": "type",
+                                    "x-ms-visibility": "advanced"
+                                  }
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "attendees"
+                        }
+                      },
+                      "description": "relationships",
+                      "required": [
+                        "label"
+                      ]
+                    }
+                  },
+                  "description": "data",
+                  "required": [
+                    "attributes",
+                    "relationships"
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ],
+              "x-ms-visibility": "advanced"
+            },
+            "x-ms-visibility": "advanced"
+          }
+        ]
+      }
+    },
+    "/calendars/{carendar_id}/events/{event_id}": {
+      "put": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "id"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "title"
+                        },
+                        "all_day": {
+                          "type": "boolean",
+                          "description": "all_day"
+                        },
+                        "start_at": {
+                          "type": "string",
+                          "description": "start_at"
+                        },
+                        "start_timezone": {
+                          "type": "string",
+                          "description": "start_timezone"
+                        },
+                        "end_at": {
+                          "type": "string",
+                          "description": "end_at"
+                        },
+                        "end_timezone": {
+                          "type": "string",
+                          "description": "end_timezone"
+                        },
+                        "location": {
+                          "type": "string",
+                          "description": "location"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "url"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "description": "updated_at"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "category"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "recurrence": {
+                          "type": "string",
+                          "description": "recurrence"
+                        },
+                        "recurring_uuid": {
+                          "type": "string",
+                          "description": "recurring_uuid"
+                        }
+                      },
+                      "description": "attributes"
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "label"
+                        },
+                        "creator": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type"
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "creator"
+                        },
+                        "attendees": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {},
+                              "description": "data"
+                            }
+                          },
+                          "description": "attendees"
+                        }
+                      },
+                      "description": "relationships"
+                    }
+                  },
+                  "description": "data"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update an event",
+        "description": "Update calendar event",
+        "operationId": "UpdateAnEvent",
+        "parameters": [
+          {
+            "name": "carendar_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/vnd.timetree.v1+json",
+            "description": "accept",
+            "x-ms-summary": "accept",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string",
+                          "description": "category",
+                          "title": "category",
+                          "default": "schedule",
+                          "enum": [
+                            "schedule",
+                            "keep"
+                          ],
+                          "x-ms-visibility": "important"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "title",
+                          "title": "title",
+                          "x-ms-visibility": "important"
+                        },
+                        "all_day": {
+                          "type": "boolean",
+                          "description": "all_day"
+                        },
+                        "start_at": {
+                          "type": "string",
+                          "description": "start_at",
+                          "title": "start_at",
+                          "x-ms-visibility": "important"
+                        },
+                        "start_timezone": {
+                          "type": "string",
+                          "description": "start_timezone"
+                        },
+                        "end_at": {
+                          "type": "string",
+                          "description": "end_at",
+                          "title": "end_at"
+                        },
+                        "end_timezone": {
+                          "type": "string",
+                          "description": "end_timezone"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "description"
+                        },
+                        "location": {
+                          "type": "string",
+                          "description": "location"
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "url"
+                        }
+                      },
+                      "description": "attributes",
+                      "required": [
+                        "title",
+                        "category",
+                        "start_at",
+                        "end_at"
+                      ]
+                    },
+                    "relationships": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "id",
+                                  "title": "event_label_id"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "type",
+                                  "title": "type",
+                                  "default": "label",
+                                  "x-ms-visibility": "internal"
+                                }
+                              },
+                              "description": "data",
+                              "required": [
+                                "id",
+                                "type"
+                              ]
+                            }
+                          },
+                          "description": "label",
+                          "required": [
+                            "data"
+                          ]
+                        },
+                        "attendees": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "id"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "type"
+                                  }
+                                }
+                              },
+                              "description": "data"
+                            }
+                          },
+                          "description": "attendees"
+                        }
+                      },
+                      "description": "relationships",
+                      "required": [
+                        "label"
+                      ]
+                    }
+                  },
+                  "description": "data",
+                  "required": [
+                    "attributes",
+                    "relationships"
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "API キー": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "security": [
+    {
+      "API キー": []
+    }
+  ],
+  "tags": []
+}
